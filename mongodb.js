@@ -8,5 +8,10 @@ const databaseName = 'task-app'
    if(error) {
      return console.log("Error occured while connecting to database")
    }
-   console.log("Connected to database");
+   const db = client.db(databaseName)
+
+   db.collection('users').insertOne({
+     name: "Daniel",
+     age: 26
+   })
  })
