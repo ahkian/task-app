@@ -1,6 +1,3 @@
-const mongodb = require('mongodb')
-// const MongoClient = mongodb.MongoClient
-// const ObjectID = mongodb.ObjectID
 const { MongoClient, ObjectID } = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
@@ -13,7 +10,16 @@ const databaseName = 'task-app'
    }
    const db = client.db(databaseName)
 
+// Searching for a document that doesn't exist return a value of null
    db.collection('users').findOne({name: "Jesus"}, (error, user) => {
+     if(error) {
+       return console.log("Unable to fetch.");
+     }
+     console.log(user)
+   })
+
+   // To search by id you must use ObjectID
+   db.collection('users').findOne({_id: new ObjectID("5f764a1ad5096d2ff16dc824")}, (error, user) => {
      if(error) {
        return console.log(error);
      }
